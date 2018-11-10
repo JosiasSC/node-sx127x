@@ -27,6 +27,7 @@
   "dependencies": {
     "async": "^2.1.2",
     "onoff": "^1.1.1",
+    "sleep": "^5.2.3",
     "spi-device": "^0.2.4"
   },
   "os": [
