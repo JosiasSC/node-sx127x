@@ -39,7 +39,7 @@ Supported options:
 Open and configure the device:
 
 ```js
-sx127x.open(callback(err));
+sx127x.open();
 ```
 
 ### Close
@@ -47,7 +47,7 @@ sx127x.open(callback(err));
 Close the device:
 
 ```js
-sx127x.close(callback(err));
+sx127x.close();
 ```
 
 ## Sending data
@@ -57,7 +57,7 @@ var data = new Buffer(/* ... */);
 
 // ...
 
-sx127x.write(data [, implicitHeader, callabck(err)]);
+sx127x.write(data [, implicitHeader]);
 ```
 
  * `data` - Node.js Buffer containing data to send.
@@ -70,7 +70,7 @@ sx127x.on('data', function(data, rssi, snr) {
   // ...
 });
 
-sx127x.receive([length, callback(err)]);
+sx127x.receive([length]);
 ```
 
  * `length` - (optional) if `> 0`, receives data of size `length` in implicit header mode, otherwise explicit header mode is used. Defaults to `0`.
@@ -86,7 +86,7 @@ sx127x.receive([length, callback(err)]);
 Put the radio in sleep mode.
 
 ```js
-sx127x.sleep(callback(err));
+sx127x.sleep();
 ```
 
 ### Idle mode
@@ -94,7 +94,7 @@ sx127x.sleep(callback(err));
 Put the radio in idle mode.
 
 ```js
-sx127x.idle(callback(err));
+sx127x.idle();
 ```
 
 ## Radio parameters
@@ -104,7 +104,7 @@ sx127x.idle(callback(err));
 Change the TX power of the radio.
 
 ```js
-sx127x.setTxPower(txPower, callback(err));
+sx127x.setTxPower(txPower);
 ```
  * `txPower` - TX power in dB, defaults to `17`
 
@@ -115,7 +115,7 @@ sx127x.setTxPower(txPower, callback(err));
 Change the frequency of the radio.
 
 ```js
-sx127x.setFrequency(frequency, callback(error));
+sx127x.setFrequency(frequency);
 ```
  * `frequency` - frequency in Hz (`433E6`, `866E6`, `915E6`)
 
@@ -124,7 +124,7 @@ sx127x.setFrequency(frequency, callback(error));
 Change the spreading factor of the radio.
 
 ```js
-sx127x.setSpreadingFactor(spreadingFactor, callback(err));
+sx127x.setSpreadingFactor(spreadingFactor);
 ```
  * `spreadingFactor` - spreading factor, defaults to `7`
 
@@ -135,7 +135,7 @@ Supported values are between `6` and `12`. If a spreading factor of `6` is set, 
 Change the signal bandwidth of the radio.
 
 ```js
-sx127x.setSignalBandwidth(signalBandwidth, callback(err));
+sx127x.setSignalBandwidth(signalBandwidth);
 ```
 
  * `signalBandwidth` - signal bandwidth in Hz, defaults to `125E3`.
@@ -147,7 +147,7 @@ Supported values are `7.8E3`, `10.4E3`, `15.6E3`, `20.8E3`, `31.25E3`, `41.7E3`,
 Change the coding rate of the radio.
 
 ```js
-sx127x.setCodingRate4(codingRate, callback(err));
+sx127x.setCodingRate4(codingRate);
 ```
 
  * `codingRate` - coding rate, defaults to `4/5`
@@ -159,7 +159,7 @@ Supported values are `4/5`, `4/6`, `4/7` and `4/8`.
 Change the preamble length of the radio.
 
 ```js
-sx127x.setPreambleLength(preambleLength, callback(err));
+sx127x.setPreambleLength(preambleLength);
 ```
 
  * `preambleLength` - preamble length in symbols, defaults to `8`
@@ -171,7 +171,7 @@ Supported values are between `6` and `65535`.
 Change the sync word of the radio.
 
 ```js
-sx127x.setSyncWord(syncWord, callback(err));
+sx127x.setSyncWord(syncWord);
 ```
 
  * `syncWord` - byte value to use as the sync word, defaults to `0x34`
@@ -181,7 +181,7 @@ sx127x.setSyncWord(syncWord, callback(err));
 Enable or disable CRC usage, by default a CRC is not used.
 
 ```js
-sx127x.crc(crc, callback(err));
+sx127x.crc(crc);
 ```
 
  * `crc` - `true` to enable CRC, `false` to disable
@@ -193,5 +193,5 @@ sx127x.crc(crc, callback(err));
 Generate a random byte, based on the Wideband RSSI measurement.
 
 ```js
-sx127x.readRandom(callback(err, data));
+sx127x.readRandom();
 ```

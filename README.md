@@ -2,6 +2,10 @@
 
 Node.js driver for [Semtech SX1276/77/78/79](http://www.semtech.com/apps/product.php?pn=SX1276) based LoRa radios.
 
+This implementation is based on the project https://github.com/sandeepmistry/node-sx127x
+
+The only difference was removing the library "async".
+
 Requires a **Linux** computer with SPI hardware, like a Raspberry Pi.
 
 Built on top of [@fivdi](https://github.com/fivdi)'s [onoff](https://github.com/fivdi/onoff) and [spi-device](https://github.com/fivdi/spi-device) modules.
