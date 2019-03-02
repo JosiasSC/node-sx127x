@@ -4,8 +4,6 @@ var sx127x = new SX127x({
   frequency: 433e6
 });
 
-var count = 0;
-
 // open the device
 sx127x.open();
 console.log('open', 'success');
