@@ -25,14 +25,11 @@
   },
   "homepage": "https://github.com/sandeepmistry/node-sx127x#readme",
   "dependencies": {
-    "onoff": "^1.1.1",
-    "sleep": "^5.2.3",
-    "spi-device": "^0.2.4"
+    "onoff": "^4.0.0",
+    "sleep": "^6.0.0",
+    "spi-device": "^2.0.6"
   },
   "os": [
     "linux"
-  ],
-  "devDependencies": {
-    "jshint": "^2.9.4"
-  }
+  ]
 }
