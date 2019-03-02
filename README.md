@@ -4,7 +4,10 @@ Node.js driver for [Semtech SX1276/77/78/79](http://www.semtech.com/apps/product
 
 This implementation is based on the project https://github.com/sandeepmistry/node-sx127x
 
-The only difference was removing the library "async".
+The differences are:
+* Removing the library "async";
+* ECMAScript 2015
+* Update dependece librarys
 
 Requires a **Linux** computer with SPI hardware, like a Raspberry Pi.
 
