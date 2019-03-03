@@ -89,7 +89,30 @@ this._readRegister = function (register) {
   return result;
 }
 
+this._writeRegister = function (register, value) {
+
+  console.log("_writeRegister(): register: " + register + " value: " + value);
+
+  var sendBuffer;
+
+  sendBuffer = Buffer.from([register | 0x80, value]);
+
+  var writeMessage = {
+    sendBuffer: sendBuffer,
+    byteLength: sendBuffer.length
+  };
+
+  this._spi.transferSync([writeMessage]);
+}
+
 this._readRegister(REG_VERSION);
+
+//sleep
+var aux = this._readRegister(REG_OP_MODE);
+this._writeRegister(REG_OP_MODE, aux | MODE_LONG_RANGE_MODE | MODE_SLEEP);
+
+this._readRegister(REG_OP_MODE);
+
 
 /*
 
