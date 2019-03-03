@@ -60,8 +60,7 @@ this._dio0Gpio = new Gpio(
   this._dio0Pin, 
   {
     mode: Gpio.INPUT, 
-    pullUpDown: Gpio.PUD_DOWN,
-    edge: Gpio.RISING_EDGE 
+    pullUpDown: Gpio.PUD_DOWN
   }); //new onoff.Gpio(this._dio0Pin, 'in', 'rising');
 this._resetGpio = new Gpio(
   this._resetPin,
@@ -121,15 +120,14 @@ this._onDio0Rise = function (value) {
 
 this._dio0Gpio.on("interrupt", this._onDio0Rise.bind(this));
 
-this._writeRegister(REG_DIO_MAPPING_1, 0x40);
-
-this._dio0Gpio.enableInterrupt(Gpio.RISING_EDGE);
-
-this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
 for (var i = 0; i < 255; i++) {
-  this._writeRegister(REG_FIFO_ADDR_PTR, 0);
+  this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
+  this._writeRegister(REG_DIO_MAPPING_1, 0x40);
+  this._dio0Gpio.enableInterrupt(Gpio.RISING_EDGE);
+    this._writeRegister(REG_FIFO_ADDR_PTR, 0);
   this._writeRegister(REG_PAYLOAD_LENGTH, 1);
   this._writeRegister(REG_FIFO, i);
+  sleep.usleep(100);
   this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_TX);
   sleep.usleep(100);
   this._readRegister(REG_OP_MODE);
