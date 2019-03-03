@@ -93,9 +93,7 @@ this._writeRegister = function (register, value) {
 
   console.log("_writeRegister(): register: " + register + " value: " + value);
 
-  var sendBuffer;
-
-  sendBuffer = Buffer.from([register | 0x80, value]);
+  var sendBuffer = Buffer.from([register | 0x80, value]);
 
   var writeMessage = {
     sendBuffer: sendBuffer,
@@ -108,9 +106,10 @@ this._writeRegister = function (register, value) {
 this._readRegister(REG_VERSION);
 
 //sleep
-var aux = this._readRegister(REG_OP_MODE);
-this._writeRegister(REG_OP_MODE, aux | MODE_LONG_RANGE_MODE | MODE_SLEEP);
+//var aux = this._readRegister(REG_OP_MODE);
+this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_SLEEP);
 
+//Vendo se estar no sleep;
 this._readRegister(REG_OP_MODE);
 
 
