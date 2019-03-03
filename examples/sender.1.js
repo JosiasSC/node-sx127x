@@ -109,9 +109,25 @@ this._readRegister(REG_VERSION);
 //var aux = this._readRegister(REG_OP_MODE);
 this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_SLEEP);
 
-//Vendo se estar no sleep;
-this._readRegister(REG_OP_MODE);
+this._onDio0Rise = function (value) {
+  var irqs = this._readRegister(REG_IRQ_FLAGS);
+  var opmode = this._readRegister(REG_OP_MODE);
+  console.log("Interrupt: value: " + value + " irqs: " + irqs + " opmode: " + opmode);
+}
 
+this._dio0Gpio.on("interrupt", this._onDio0Rise.bind(this));
+
+this._writeRegister(REG_DIO_MAPPING_1, 0x40);
+
+this._dio0Gpio.enableInterrupt(Gpio.RISING_EDGE);
+
+for (var i = 0; i < 255; i++) {
+  this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
+  this._writeRegister(REG_FIFO_ADDR_PTR, 0);
+  this._writeRegister(REG_PAYLOAD_LENGTH, 1);
+  this._writeRegister(REG_FIFO, i);
+  this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_TX);
+}
 
 /*
 
