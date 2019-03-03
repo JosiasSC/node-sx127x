@@ -113,6 +113,7 @@ this._onDio0Rise = function (value) {
   var irqs = this._readRegister(REG_IRQ_FLAGS);
   var opmode = this._readRegister(REG_OP_MODE);
   console.log("Interrupt: value: " + value + " irqs: " + irqs + " opmode: " + opmode);
+  this._writeRegister(REG_IRQ_FLAGS, irqs);
 }
 
 this._dio0Gpio.on("interrupt", this._onDio0Rise.bind(this));
