@@ -52,7 +52,7 @@ var MODE_CAD                   = 0x07;
 var PA_BOOST                   = 0x80;
 
 this._dio0Pin = 25;
-this._resetGpio = 24;
+this._resetPin = 24;
 
 this._dio0Gpio = new Gpio(
   this._dio0Pin, 
