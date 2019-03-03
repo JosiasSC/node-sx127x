@@ -16,7 +16,8 @@ sx127x.on('data', function(data, rssi, snr) {
 });
 
 // enable receive mode
-sx127x.receive();
+//sx127x.receive();
+sx127x.channelActivityDetection();
 console.log('receive', 'success');
 
 process.on('SIGINT', function() {
