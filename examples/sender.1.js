@@ -6,6 +6,10 @@ const Gpio = require('pigpio').Gpio;
 const spi = require('spi-device');
 const sleep = require('sleep');
 
+function msleep(n) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
+}
+
 var SPI_OPTIONS = {
   mode: spi.MODE0,
   maxSpeedHz: 12E6
@@ -71,6 +75,7 @@ this._resetGpio = new Gpio(
 
 this._spi = spi.openSync(this._spiBus, this._spiDevice, SPI_OPTIONS);
 
+//reset
 this._resetGpio.digitalWrite(0);
 sleep.usleep(100);
 this._resetGpio.digitalWrite(1);
@@ -111,6 +116,8 @@ this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_SLEEP);
 this._writeRegister(REG_FIFO_TX_BASE_ADDR, 0);
 this._writeRegister(REG_FIFO_RX_BASE_ADDR, 0);
 
+this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
+
 this._onDio0Rise = function (value) {
   var irqs = this._readRegister(REG_IRQ_FLAGS);
   var opmode = this._readRegister(REG_OP_MODE);
@@ -120,18 +127,18 @@ this._onDio0Rise = function (value) {
 
 this._dio0Gpio.on("interrupt", this._onDio0Rise.bind(this));
 
+
+
 for (var i = 0; i < 255; i++) {
   this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
-  this._writeRegister(REG_DIO_MAPPING_1, 0x40);
-  this._dio0Gpio.enableInterrupt(Gpio.RISING_EDGE);
-    this._writeRegister(REG_FIFO_ADDR_PTR, 0);
+  
+  this._writeRegister(REG_FIFO_ADDR_PTR, 0);
   this._writeRegister(REG_PAYLOAD_LENGTH, 1);
   this._writeRegister(REG_FIFO, i);
-  sleep.usleep(100);
+  this._writeRegister(REG_DIO_MAPPING_1, 0x40);
+  this._dio0Gpio.enableInterrupt(Gpio.RISING_EDGE);
   this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_TX);
-  sleep.usleep(100);
-  this._readRegister(REG_OP_MODE);
-  sleep.msleep(1000);
+  msleep(1000);
 }
 
 /*
