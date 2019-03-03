@@ -129,6 +129,7 @@ for (var i = 0; i < 255; i++) {
   this._writeRegister(REG_FIFO, i);
   this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_TX);
   sleep.msleep(1000);
+  this._readRegister(REG_OP_MODE);
 }
 
 /*
