@@ -122,12 +122,13 @@ this._writeRegister(REG_DIO_MAPPING_1, 0x40);
 
 this._dio0Gpio.enableInterrupt(Gpio.RISING_EDGE);
 
+this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
 for (var i = 0; i < 255; i++) {
-  this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
   this._writeRegister(REG_FIFO_ADDR_PTR, 0);
   this._writeRegister(REG_PAYLOAD_LENGTH, 1);
   this._writeRegister(REG_FIFO, i);
   this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_TX);
+  sleep.usleep(100);
   this._readRegister(REG_OP_MODE);
   sleep.msleep(1000);
 }
