@@ -116,8 +116,6 @@ this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_SLEEP);
 this._writeRegister(REG_FIFO_TX_BASE_ADDR, 0);
 this._writeRegister(REG_FIFO_RX_BASE_ADDR, 0);
 
-this._writeRegister(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_STDBY);
-
 this._onDio0Rise = function (value) {
   var irqs = this._readRegister(REG_IRQ_FLAGS);
   var opmode = this._readRegister(REG_OP_MODE);
