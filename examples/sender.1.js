@@ -84,7 +84,7 @@ this._readRegister = function (register) {
   return result;
 }
 
-console.log( "this._readRegister(REG_VERSION): " + this._readRegister(REG_VERSION));
+this._readRegister(REG_VERSION);
 
 /*
 
