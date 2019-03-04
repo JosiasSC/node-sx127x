@@ -12,7 +12,7 @@ setInterval(function() {
   console.log('write: hello ' + count);
   try {
 //    sx127x.write(Buffer.from('hello ' + count++), true);
-    sx127x.write(Buffer.from('T'), true);
+    sx127x.write(Buffer.from('T'));
     console.log('\t', 'success');
   } catch (err) {
     console.log('\t', err);
