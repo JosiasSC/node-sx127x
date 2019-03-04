@@ -11,7 +11,7 @@ sx127x.open();
 setInterval(function() {
   console.log('write: hello ' + count);
   try {
-    sx127x.write(Buffer.from('hello ' + count++));
+    sx127x.write(Buffer.from('hello ' + count++), true);
     console.log('\t', 'success');
   } catch (err) {
     console.log('\t', err);
