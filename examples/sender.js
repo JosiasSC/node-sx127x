@@ -1,10 +1,8 @@
 var SX127x = require('../index'); // or require('sx127x')
 
-var sx127x = new SX127x(
-  {
-    frequency: 433e6
-  }
-);
+var sx127x = new SX127x({
+  frequency: 433e6
+});
 
 var count = 0;
 
@@ -15,8 +13,7 @@ sx127x.open();
 setInterval(function() {
   console.log('write: hello ' + count);
   try {
-//    sx127x.write(Buffer.from('hello ' + count++), true);
-    sx127x.write(Buffer.from('T'));
+    sx127x.write(new Buffer('hello ' + count++));
     console.log('\t', 'success');
   } catch (err) {
     console.log('\t', err);

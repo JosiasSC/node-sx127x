@@ -1,10 +1,10 @@
 var SX127x = require('../index'); // or require('sx127x')
 
-var sx127x = new SX127x(
-  {
-    frequency: 433e6
-  }
-);
+var sx127x = new SX127x({
+  frequency: 433e6
+});
+
+var count = 0;
 
 // open the device
 sx127x.open();
@@ -17,7 +17,6 @@ sx127x.on('data', function(data, rssi, snr) {
 
 // enable receive mode
 sx127x.receive();
-// sx127x.channelActivityDetection();
 console.log('receive', 'success');
 
 process.on('SIGINT', function() {
@@ -30,4 +29,3 @@ process.on('SIGINT', function() {
   }
   process.exit();
 });
-
