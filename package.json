@@ -26,7 +26,6 @@
   "homepage": "https://github.com/sandeepmistry/node-sx127x#readme",
   "dependencies": {
     "onoff": "^4.1.0",
-    "pigpio": "^1.2.1",
     "sleep": "^6.0.0",
     "spi-device": "^2.0.6"
   },
