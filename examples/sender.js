@@ -9,13 +9,15 @@ var count = 0;
 
 // open the device
 sx127x.open();
+console.log('open', 'success');
 
 // send a message every second
 setInterval(function() {
-  console.log('write: hello ' + count);
+  var data = 'hello ' + count++;
+  data += " | length: " + data.length; 
+  console.log("data", data);
   try {
-    sx127x.write(Buffer.from('hello ' + count++));
-    console.log('\t', 'success');
+    sx127x.write(Buffer.from(data));
   } catch (err) {
     console.log('\t', err);
   }
