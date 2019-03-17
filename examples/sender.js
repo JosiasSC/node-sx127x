@@ -13,9 +13,8 @@ console.log('open', 'success');
 
 // send a message every second
 setInterval(function() {
-  var data = 'hello ' + count++;
-  data += " | length: " + data.length; 
-  console.log("data", data);
+  var data = "hello " + count++;
+  console.log("data", "'" + data + "'", "length", data.length);
   try {
     sx127x.write(Buffer.from(data));
   } catch (err) {
