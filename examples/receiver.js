@@ -2,7 +2,8 @@ var SX127x = require('../index'); // or require('sx127x')
 
 var sx127x = new SX127x({
   frequency: 433e6,
-  crc: false
+  crc: false,
+  signalBandwidth: 500e3
 });
 
 var count = 0;
