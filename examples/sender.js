@@ -21,7 +21,7 @@ setInterval(function() {
   } catch (err) {
     console.log('\t', err);
   }
-}, 500);
+}, 250);
 
 process.on('SIGINT', function() {
   // close the device
